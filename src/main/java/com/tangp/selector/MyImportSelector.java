@@ -13,7 +13,7 @@ public class MyImportSelector implements ImportSelector {
 	public String[] selectImports(AnnotationMetadata importingClassMetadata) {
 		//不要返回null,否则会抛空指针
 		
-		return new String[] {"com.tangp.bean.Bule","com.tangp.bean.Yellow"};
+		return new String[] {"com.tangp.bean.register.Bule","com.tangp.bean..register.Yellow"};
 	}
 
 }

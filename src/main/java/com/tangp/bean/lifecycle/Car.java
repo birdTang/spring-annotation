@@ -1,4 +1,4 @@
-package com.tangp.bean;
+package com.tangp.bean.lifecycle;
 
 public class Car {
 

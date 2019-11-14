@@ -1,4 +1,4 @@
-package com.tangp.bean;
+package com.tangp.bean.register;
 
 import org.springframework.beans.factory.FactoryBean;
 

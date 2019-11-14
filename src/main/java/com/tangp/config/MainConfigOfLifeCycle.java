@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-import com.tangp.bean.Car;
+import com.tangp.bean.lifecycle.Car;
 
 /**
  * bean的生命周期：
@@ -30,12 +30,12 @@ import com.tangp.bean.Car;
  * 
  * BeanPostProcessor原理
  * populateBean(beanName, mbd, instanceWrapper);给bean进行属性赋值
- * initializeBean
- * {
- * applyBeanPostProcessorsBeforeInitialization(wrappedBean, beanName);
- * invokeInitMethods(beanName, wrappedBean, mbd);执行自定义初始化
- * applyBeanPostProcessorsAfterInitialization(wrappedBean, beanName);
- *}
+ * initializeBean()
+ * 	{
+ * 		applyBeanPostProcessorsBeforeInitialization(wrappedBean, beanName);
+ * 		invokeInitMethods(beanName, wrappedBean, mbd);执行自定义初始化
+ * 		applyBeanPostProcessorsAfterInitialization(wrappedBean, beanName);
+ *	}
  * 
  * 
  * 
@@ -54,7 +54,7 @@ import com.tangp.bean.Car;
  * Spring底层对 BeanPostProcessor 的使用；
  * 		bean赋值，注入其他组件，@Autowired，生命周期注解功能，@Async,xxx BeanPostProcessor;
  * 
- * @author lfy
+ * @author tangp
  *
  */
 @Configuration

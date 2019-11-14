@@ -8,10 +8,10 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 
-import com.tangp.bean.Color;
-import com.tangp.bean.ColorFactoryBean;
 import com.tangp.bean.Person;
-import com.tangp.bean.Red;
+import com.tangp.bean.register.Color;
+import com.tangp.bean.register.ColorFactoryBean;
+import com.tangp.bean.register.Red;
 import com.tangp.condition.LinuxCondition;
 import com.tangp.condition.WinCondition;
 import com.tangp.selector.MyImportBeanDefinitionRegistrar;

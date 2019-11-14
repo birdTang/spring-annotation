@@ -5,7 +5,7 @@ import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.type.AnnotationMetadata;
 
-import com.tangp.bean.Rainbow;
+import com.tangp.bean.register.Rainbow;
 
 public class MyImportBeanDefinitionRegistrar
 		implements
