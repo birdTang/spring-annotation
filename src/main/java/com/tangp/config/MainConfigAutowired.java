@@ -3,8 +3,12 @@ package com.tangp.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 import com.tangp.bean.Person;
+import com.tangp.bean.lifecycle.Car;
+import com.tangp.bean.register.Color;
+import com.tangp.dao.BookDao;
 
 /**
  * 自动装配;
@@ -12,7 +16,7 @@ import com.tangp.bean.Person;
  * 
  * 1）、@Autowired：自动注入：
  * 		1）、默认优先按照类型去容器中找对应的组件:applicationContext.getBean(BookDao.class);找到就赋值
- * 		2）、如果找到多个相同类型的组件，再将属性的名称作为组件的id去容器中查找
+ * 		2）、如果找到多个相同类型的组件，再将属性的名称(bookDao)作为组件的id去容器中查找
  * 							applicationContext.getBean("bookDao")
  * 		3）、@Qualifier("bookDao")：使用@Qualifier指定需要装配的组件的id，而不是使用属性名
  * 		4）、自动装配默认一定要将属性赋值好，没有就会报错；
@@ -27,7 +31,7 @@ import com.tangp.bean.Person;
  * 2）、Spring还支持使用@Resource(JSR250)和@Inject(JSR330)[java规范的注解]
  * 		@Resource:
  * 			可以和@Autowired一样实现自动装配功能；默认是按照组件名称进行装配的；
- * 			没有能支持@Primary功能没有支持@Autowired（reqiured=false）;
+ * 			没有能支持@Primary功能(设置了@Primary的bean也没用)没有支持@Autowired（reqiured=false）;
  * 		@Inject:
  * 			需要导入javax.inject的包，和Autowired的功能一样。没有required=false的功能；
  *  @Autowired:Spring定义的； @Resource、@Inject都是java规范
@@ -50,11 +54,27 @@ import com.tangp.bean.Person;
  *
  */
 @Configuration
-@ComponentScan(value = {"com.tangp.controller","com.tangp.service","com.tangp.dao"})
+@ComponentScan(value = {"com.tangp.controller","com.tangp.service","com.tangp.dao","com.tangp.bean"})
 public class MainConfigAutowired {
 
 	@Bean
 	public Person person() {
 		return new Person();
+	}
+	
+	@Primary
+	@Bean
+	public BookDao bookDao2() {
+		BookDao bookDao = new BookDao();
+		bookDao.setLable("2");
+		return bookDao;
+	}
+	
+	//@Bean 标注的方法创建对象的时候，方法参数的值从容器中获取
+	@Bean
+	public Color color(Car car) {
+		Color color = new Color();
+		color.setCar(car);
+		return color;
 	}
 }
