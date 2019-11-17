@@ -107,6 +107,7 @@ import com.tangp.aop.MathCalculator;
  * 			
  * 		
  * AnnotationAwareAspectJAutoProxyCreator【InstantiationAwareBeanPostProcessor】	的作用：
+ * 【创建Bean实例之前先尝试用后置处理器返回目标对象的代理】
  * 1）、每一个bean创建之前，调用postProcessBeforeInstantiation()；
  * 		关心MathCalculator和LogAspect的创建
  * 		1）、判断当前bean是否在advisedBeans中（保存了所有需要增强bean）
@@ -119,13 +120,14 @@ import com.tangp.aop.MathCalculator;
  * 			2）、永远返回false
  * 
  * 2）、创建对象
- * postProcessAfterInitialization；
+AbstractAutoProxyCreator.postProcessAfterInitialization
  * 		return wrapIfNecessary(bean, beanName, cacheKey);//包装如果需要的情况下
- * 		1）、获取当前bean的所有增强器（通知方法）  Object[]  specificInterceptors
+ * 		1）、获取当前bean的所有增强器（即通知方法。类型为Advisor） 存入 Object[]  specificInterceptors
  * 			1、找到候选的所有的增强器（找哪些通知方法是需要切入当前bean方法的）
  * 			2、获取到能在bean使用的增强器。
  * 			3、给增强器排序
- * 		2）、保存当前bean在advisedBeans中；
+ * 		2）、保存当前bean在advisedBeans中；cacheKey就是对象在容器中的id
+ * 			this.advisedBeans.put(cacheKey, Boolean.TRUE);
  * 		3）、如果当前bean需要增强，创建当前bean的代理对象；
  * 			1）、获取所有增强器（通知方法）
  * 			2）、保存到proxyFactory
@@ -141,7 +143,7 @@ import com.tangp.aop.MathCalculator;
  * 		1）、CglibAopProxy.intercept();拦截目标方法的执行
  * 		2）、根据ProxyFactory对象获取将要执行的目标方法拦截器链；
  * 			List<Object> chain = this.advised.getInterceptorsAndDynamicInterceptionAdvice(method, targetClass);
- * 			1）、List<Object> interceptorList保存所有拦截器 5
+ * 			1）、List<Object> interceptorList保存所有拦截器 ，长度为5
  * 				一个默认的ExposeInvocationInterceptor 和 4个增强器；
  * 			2）、遍历所有的增强器，将其转为Interceptor；
  * 				registry.getInterceptors(advisor);

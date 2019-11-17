@@ -46,7 +46,7 @@ import com.tangp.dao.BookDao;
  * 4）、自定义组件想要使用Spring容器底层的一些组件（ApplicationContext，BeanFactory，xxx）；
  * 		自定义组件实现xxxAware；在创建对象的时候，会调用接口规定的方法注入相关组件；Aware；
  * 		把Spring底层一些组件注入到自定义的Bean中；
- * 		xxxAware：功能使用xxxProcessor；
+ * 		xxxAware：功能实现使用xxxAwareProcessor；
  * 			ApplicationContextAware==》ApplicationContextAwareProcessor；
  * 	
  * 		

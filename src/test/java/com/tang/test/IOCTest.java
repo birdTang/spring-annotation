@@ -8,7 +8,7 @@ import org.springframework.core.env.ConfigurableEnvironment;
 
 import com.tangp.bean.Person;
 import com.tangp.config.MainConfig;
-import com.tangp.config.MainConfig2;
+import com.tangp.config.MainConfigAddBean;
 
 public class IOCTest {
 
@@ -26,7 +26,7 @@ public class IOCTest {
 	@Test
 	public void testCompentScope() {
 		AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(
-				MainConfig2.class);
+				MainConfigAddBean.class);
 
 		String[] beanDefinitionNames = applicationContext.getBeanDefinitionNames();
 		for (String string : beanDefinitionNames) {
@@ -42,7 +42,7 @@ public class IOCTest {
 	@Test
 	public void testCompentConditional() {
 		AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(
-				MainConfig2.class);
+				MainConfigAddBean.class);
 		ConfigurableEnvironment environment = applicationContext.getEnvironment();
 		System.out.println(environment.getProperty("os.name"));
 		String[] beanDefinitionNames = applicationContext.getBeanDefinitionNames();
@@ -56,7 +56,7 @@ public class IOCTest {
 	
 	@Test
 	public void TextImport() {
-		AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(MainConfig2.class);
+		AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(MainConfigAddBean.class);
 		printBeans(applicationContext);
 //		//工厂bean获取到的是调用getObject创建的对象
 //		Object bean = applicationContext.getBean("colorFactoryBean");
